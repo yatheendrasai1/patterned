@@ -1,0 +1,11 @@
+extends ../layouts/default.pug
+
+block page-header
+    h3 Register
+
+block content
+    h4 Try to login Here....
+    form(action='/registerUser', method='POST')
+        p User Name:
+            input(type='text', name='userName', value='')
+        input(type='submit', value='Submit')

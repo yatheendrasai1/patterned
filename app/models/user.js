@@ -10,12 +10,16 @@ const Schema = mongoose.Schema;
  */
 
 const UserSchema = new Schema({
-  name: { type: String, default: '' },
-  email: { type: String, default: '' },
-  hashed_password: { type: String, default: '' },
-  salt: { type: String, default: '' }
+  username: { type: String, default: '' },
+  aura: { type: String, default: '' }
 });
 
+// const UserSchema = new Schema({
+//   name: { type: String, default: '' },
+//   email: { type: String, default: '' },
+//   hashed_password: { type: String, default: '' },
+//   salt: { type: String, default: '' }
+// });
 /**
  * Add your
  * - pre-save hooks
@@ -39,4 +43,4 @@ UserSchema.static({});
  * Register
  */
 
-mongoose.model('User', UserSchema);
+module.exports = mongoose.model('User', UserSchema);

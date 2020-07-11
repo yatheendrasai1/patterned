@@ -11,8 +11,14 @@ const home = require('../app/controllers/home');
  */
 
 module.exports = function(app) {
-  app.get('/', home.index);
-
+  app.get('/', home.homepage);
+  app.get("/notes",home.notes);
+  app.get("/register", home.register);
+  app.post("/registerUser",home.registerUser);
+  app.get("/login", home.login);
+  app.post("/login", home.loginUser);
+  app.get("/users", home.getUsers);
+  app.get("/loadNotification", home.loadNotification);
   /**
    * Error handling
    */

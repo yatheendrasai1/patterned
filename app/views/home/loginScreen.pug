@@ -1,0 +1,11 @@
+extends ../layouts/default.pug
+
+block page-header
+    h2 Hey! Good to see you again!
+    h3 Enter your Aura Number below...
+
+block content
+     form(action='/login', method='POST')
+        p Aura Number:
+            input(type='text', name='aura', value='')
+        input(type='submit', value='Proceed')

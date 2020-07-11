@@ -1,9 +1,98 @@
 /*!
  * Module dependencies.
  */
+const _ = require('lodash');
+const usermodel = require("../models/user");
+const notifier = require('node-notifier');
 
-exports.index = function(req, res) {
+function homepage(req, res){
   res.render('home/index', {
-    title: 'Node Express Mongoose Boilerplate'
+    title: 'Patterned.'
   });
+}
+
+function notes(req, res){
+  res.render('home/notes', {
+    title: 'Patterned.'
+  });
+}
+
+function register(req, res){
+  res.render('home/registerScreen',{
+    title: "Patterned."
+  });
+}
+
+function registerUser(req, res){
+  var userName = req.body.userName;
+  var userID =  Math.random().toString(36).replace(/[^a-z]+/g, '').substr(0, 10);
+  var userAura = userName+"-"+userID;
+  var userDetails = {
+    username: userName,
+    aura: userAura
+  }
+  return usermodel.create(userDetails).then(function(userInfo){
+    res.render("home/afterRegistration",{
+      title: "Welcome to Patterned.",
+      username: userInfo.username,
+      auraNumber: userInfo.aura
+    })
+  });
+}
+
+function login(req, res){
+  res.render("home/loginScreen",{
+    title: "Login Screen"
+  });
+}
+
+function loginUser(req, res){
+  var auraNumber = req.body.aura;
+  return usermodel.findOne({aura:auraNumber}).then(function(userInfo){
+    console.log("sss:::: ", userInfo);
+    if(!_.isEmpty(userInfo)){
+      res.render("home/baseScreen",{
+        title: "Base Screen",
+        username: userInfo.username
+      });
+    }
+    else{
+      res.render('home/registerScreen',{
+        title: "Patterned."
+      });
+    }
+  })
+}
+
+async function loadNotification(req, res){
+  await new Promise(r => setTimeout(r, 5000));
+  notifier.notify({
+    title: "Time To Record!",
+    message: "it's the Main Step, dont miss to log your work...",
+    icon: "https://2.img-dpreview.com/files/p/E~C1000x0S4000x4000T1200x1200~articles/3925134721/0266554465.jpeg",
+    sound: true,
+    wait: true,
+    open: "http:/localhost:3000/aboutus",
+  });
+  res.render('home/baseScreen',{
+    title: "Patterned.",
+    username: "Sai"
+  });
+}
+
+function getUsers(req, res){
+  return usermodel.find({}).then(function(users){
+    return res.send(users);
+  })
+}
+
+module.exports = {
+  homepage: homepage,
+  notes: notes,
+  registerUser: registerUser,
+  register: register,
+  getUsers: getUsers,
+  login: login,
+  loginUser: loginUser,
+  loadNotification: loadNotification
 };
