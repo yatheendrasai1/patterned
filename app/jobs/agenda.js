@@ -2,7 +2,7 @@ const Agenda = require("agenda");
 const userNotification = require("./jobslist/NotifyUserToRecord.js");
 
 const agenda = new Agenda({
-    db: { address: process.env.MONGODB_URL },
+    db: { address: process.env.MONGODB_URL , collection: process.env.AGENDA_JOBS_COLLECTION_NAME},
     maxConcurrency: 5,
     defaultConcurrency: 1
 });
