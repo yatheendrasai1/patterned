@@ -3,5 +3,5 @@
  */
 
 module.exports = {
-  db: 'mongodb://localhost/patterned'
+  db: process.env.MONGODB_URL
 };

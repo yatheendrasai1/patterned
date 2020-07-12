@@ -4,6 +4,7 @@
 const _ = require('lodash');
 const usermodel = require("../models/user");
 const notifier = require('node-notifier');
+const scheduler = require("../../config/scheduler");
 
 function homepage(req, res){
   res.render('home/index', {
@@ -65,15 +66,7 @@ function loginUser(req, res){
 }
 
 async function loadNotification(req, res){
-  await new Promise(r => setTimeout(r, 5000));
-  notifier.notify({
-    title: "Time To Record!",
-    message: "it's the Main Step, dont miss to log your work...",
-    icon: "https://2.img-dpreview.com/files/p/E~C1000x0S4000x4000T1200x1200~articles/3925134721/0266554465.jpeg",
-    sound: true,
-    wait: true,
-    open: "http:/localhost:3000/aboutus",
-  });
+  await scheduler.userNotification({});
   res.render('home/baseScreen',{
     title: "Patterned.",
     username: "Sai"
