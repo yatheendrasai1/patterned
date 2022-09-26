@@ -37,7 +37,7 @@
     "npm-registry-fetch": "^8.1.1",
     "passport": "~0.4.1",
     "passport-local": "~1.0.0",
-    "pm2": "^4.4.0",
+    "pm2": "^5.2.0",
     "pug": "~2.0.4",
     "pug-cli": "^1.0.0-alpha6",
     "view-helpers": "~0.2.0",
